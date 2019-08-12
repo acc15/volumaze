@@ -1,0 +1,45 @@
+{
+    "name": "volumaze",
+    "version": "1.0.0",
+    "description": "Best of the Best of the Best Volume Control",
+    "main": "index.ts",
+    "scripts": {
+        "start": "webpack-dev-server",
+        "build": "webpack-cli --mode=production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/acc15/volumaze.git"
+    },
+    "keywords": [
+        "volume",
+        "control",
+        "volumaze",
+        "typescript"
+    ],
+    "author": "vm",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/acc15/volumaze/issues"
+    },
+    "homepage": "https://github.com/acc15/volumaze#readme",
+    "devDependencies": {
+        "@types/copy-webpack-plugin": "^5.0.0",
+        "@types/html-webpack-plugin": "^3.2.1",
+        "@types/mini-css-extract-plugin": "^0.2.1",
+        "@types/node": "^12.6.8",
+        "@types/webpack": "^4.32.1",
+        "@types/webpack-dev-server": "^3.1.7",
+        "copy-webpack-plugin": "^5.0.4",
+        "css-loader": "^3.1.0",
+        "html-webpack-plugin": "^3.2.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "style-loader": "^0.23.1",
+        "ts-loader": "^6.0.4",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.3",
+        "webpack": "^4.37.0",
+        "webpack-cli": "^3.3.6",
+        "webpack-dev-server": "^3.7.2"
+    }
+}
