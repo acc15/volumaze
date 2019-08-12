@@ -1,5 +1,6 @@
-type PointLike = Point | Array<number> | number
+export const TWO_PI = 2 * Math.PI;
 
+export type PointLike = Point | Array<number> | number
 export class Point {
     public x: number = 0;
     public y: number = 0;
@@ -128,3 +129,4 @@ export class Range {
     }
 
 }
+

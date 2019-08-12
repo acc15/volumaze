@@ -1,11 +1,10 @@
-import "./volumaze.css";
 import {Dir, generateMaze, MazeNode} from "./maze";
 import {drawMaze} from "./mazedraw";
-import {Point, Range} from "./util";
+import {Point, Range, TWO_PI} from "./util";
+import "./volumaze.css";
 
 const canvas = <HTMLCanvasElement> document.getElementById("maze");
-const maze = generateMaze(32, 32, 9, new Range(30, Math.min(canvas.width, canvas.height) / 2));
-const TWO_PI = 2*Math.PI;
+const maze = generateMaze(32, 24, new Range(30, Math.min(canvas.width, canvas.height) / 2));
 
 const keyMask: { [k: string]: boolean } = {};
 const playerRadius = 5;
@@ -16,7 +15,7 @@ const playerPosition = new Point(currentNode.angle.center(), currentNode.radius.
 
 const audio = <HTMLAudioElement> document.getElementById("audio");
 audio.volume = 0;
-//audio.play();
+// audio.play();
 
 function onFrame() {
     requestAnimationFrame(onFrame);
@@ -101,7 +100,6 @@ function drawFrame(ctx: CanvasRenderingContext2D, dim: Point) {
     ctx.closePath();
     ctx.fill();
     */
-
 
     drawPlayer(ctx, center, playerPosition);
 }

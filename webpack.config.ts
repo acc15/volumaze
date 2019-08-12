@@ -13,7 +13,7 @@ const config: webpack.Configuration = {
         filename: 'volumaze.js'
     },
     devServer: {
-        contentBase: destDir
+        contentBase: './src'
     },
     module: {
         rules: [

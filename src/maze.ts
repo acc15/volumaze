@@ -1,5 +1,5 @@
 import {backtraceCarve} from "./mazegen";
-import {Range} from "./util";
+import {Range, TWO_PI} from "./util";
 
 export const enum Dir {
     LEFT,
@@ -88,14 +88,17 @@ export function makeMazeRing(segmentCount: number, subdivisions: number, radius:
     return segments;
 }
 
-export function makeMazeRings(ringCount: number, segmentCount: number, subdivisions: number, radius: Range): CircleMaze {
+export function makeMazeRings(ringCount: number, maxSegmentArc: number, radius: Range): CircleMaze {
     const rings: Array<Array<MazeNode>> = [];
 
     const radiusRange = Range.byStep(radius.min, radius.length() / ringCount);
+
+    let segmentCount = Math.ceil(TWO_PI * radiusRange.max / maxSegmentArc / 4) * 4;
     for (let i = 0; i < ringCount; i++) {
         let ringSubdivisions = 1;
 
-        if (i > 0 && i % subdivisions === 0) {
+        let segmentArc = TWO_PI * radiusRange.max / segmentCount;
+        if (segmentArc > maxSegmentArc) {
             segmentCount *= 2;
             ringSubdivisions = 2;
         }
@@ -106,8 +109,8 @@ export function makeMazeRings(ringCount: number, segmentCount: number, subdivisi
     return { rings, radius };
 }
 
-export function generateMaze(ringCount: number, segmentCount: number, subdivisions: number, radius: Range): CircleMaze {
-    const maze = makeMazeRings(ringCount, segmentCount, subdivisions, radius);
+export function generateMaze(ringCount: number, maxSegmentArc: number, radius: Range): CircleMaze {
+    const maze = makeMazeRings(ringCount, maxSegmentArc, radius);
     backtraceCarve([maze.rings[0][0]]);
     return maze;
 }
