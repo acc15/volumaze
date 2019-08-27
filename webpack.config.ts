@@ -13,6 +13,7 @@ const config: webpack.Configuration = {
         filename: 'volumaze.js'
     },
     devServer: {
+        host: '0.0.0.0',
         contentBase: './src'
     },
     module: {

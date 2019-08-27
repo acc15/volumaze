@@ -4,7 +4,7 @@ import {Point, Range, TWO_PI} from "./util";
 import "./volumaze.css";
 
 const canvas = <HTMLCanvasElement> document.getElementById("maze");
-const maze = generateMaze(32, 24, new Range(30, Math.min(canvas.width, canvas.height) / 2));
+const maze = generateMaze(24, 24, new Range(30, Math.min(canvas.width, canvas.height) / 2));
 
 const keyMask: { [k: string]: boolean } = {};
 const playerRadius = 5;
@@ -15,7 +15,23 @@ const playerPosition = new Point(currentNode.angle.center(), currentNode.radius.
 
 const audio = <HTMLAudioElement> document.getElementById("audio");
 audio.volume = 0;
-// audio.play();
+audio.play().then(() => console.log("Playing"), err => console.error(err));
+
+
+function capitalize(str: string): string {
+    return str.length > 0 ? str.substring(0, 1).toUpperCase() + str.substring(1) : str;
+}
+
+["up", "down", "left", "right"].forEach(k => {
+    const btn: HTMLButtonElement = <HTMLButtonElement> document.getElementById("key-" + k);
+    btn.ontouchstart = btn.onmousedown = function() {
+        keyMask["Arrow" + capitalize(k)] = true;
+    };
+    btn.ontouchend = btn.onmouseleave = btn.onmouseup = function() {
+        keyMask["Arrow" + capitalize(k)] = false;
+    };
+});
+
 
 function onFrame() {
     requestAnimationFrame(onFrame);
@@ -23,7 +39,7 @@ function onFrame() {
 }
 
 function process() {
-    const speed = 2;
+    const speed = 1;
     const p = new Point(
         (keyMask["ArrowRight"] ? 1 : keyMask["ArrowLeft"] ? -1 : 0),
         (keyMask["ArrowUp"] ? 1 : keyMask["ArrowDown"] ? -1 : 0)
@@ -105,9 +121,11 @@ function drawFrame(ctx: CanvasRenderingContext2D, dim: Point) {
 }
 
 function drawPlayer(ctx: CanvasRenderingContext2D, center: Point, position: Point) {
+    /*
     ctx.strokeStyle = "black";
     ctx.font = "15px normal sans-serif";
     ctx.strokeText("Position: " + position.x.toFixed(2) + "; " + position.y.toFixed(2) + "; Volume: " + audio.volume.toFixed(2), 0, 20);
+    */
 
     ctx.beginPath();
     const pos = center.copy().add(position.copy().polar());
@@ -124,7 +142,7 @@ window.onkeyup = function(e) {
 };
 
 // processing at 30fps
-const fixedFps = 30;
+const fixedFps = 60;
 const processTime = 1000 / fixedFps;
 setInterval(process, processTime);
 requestAnimationFrame(onFrame);

@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="user-scalable=no">
         <title>Volumaze</title>
     </head>
     <body>
@@ -10,13 +11,16 @@
                 <h1>volumaze 2000</h1>
             </div>
             <div id="body">
-                <canvas id="maze" width="1000" height="1000"></canvas>
-            </div>
-            <div id="footer">
-                <audio id="audio">
+                <audio id="audio" preload="auto">
                     <source src="track.mp3" type="audio/mp3" />
                     Your browser does not support the audio element.
                 </audio>
+                <canvas id="maze" width="640" height="640"></canvas>
+                <div id="controls">
+                    <button id="key-left">&larr;</button><button id="key-right">&rarr;</button><button id="key-up">&uarr;</button><button id="key-down">&darr;</button>
+                </div>
+            </div>
+            <div id="footer">
             </div>
         </div>
     </body>

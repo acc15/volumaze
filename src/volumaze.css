@@ -31,7 +31,20 @@ html, body {
     margin: 0 auto;
 }
 
-
 #maze {
     margin: 0 auto;
+}
+
+#controls {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#controls button {
+    user-select: none;
+    width: 25%;
+    margin: 0;
+    padding: 0;
+    height: 120pt;
+    font-size: 50px;
 }
