@@ -15,16 +15,23 @@ const playerPosition = new Point(currentNode.angle.center(), currentNode.radius.
 
 const audio = <HTMLAudioElement> document.getElementById("audio");
 audio.volume = 0;
-audio.play().then(() => console.log("Playing"), err => console.error(err));
-
 
 function capitalize(str: string): string {
     return str.length > 0 ? str.substring(0, 1).toUpperCase() + str.substring(1) : str;
 }
 
+window.onkeydown = function(e) {
+    audio.play();
+    keyMask[e.key] = true;
+};
+window.onkeyup = function(e) {
+    delete keyMask[e.key];
+};
+
 ["up", "down", "left", "right"].forEach(k => {
     const btn: HTMLButtonElement = <HTMLButtonElement> document.getElementById("key-" + k);
     btn.ontouchstart = btn.onmousedown = function() {
+        audio.play();
         keyMask["Arrow" + capitalize(k)] = true;
     };
     btn.ontouchend = btn.onmouseleave = btn.onmouseup = function() {
@@ -134,12 +141,6 @@ function drawPlayer(ctx: CanvasRenderingContext2D, center: Point, position: Poin
     ctx.fill();
 }
 
-window.onkeydown = function(e) {
-    keyMask[e.key] = true;
-};
-window.onkeyup = function(e) {
-    delete keyMask[e.key];
-};
 
 // processing at 30fps
 const fixedFps = 60;
